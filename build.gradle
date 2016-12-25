@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework:spring-context:4.3.5.RELEASE'
+    compile 'org.springframework:spring-jdbc:4.3.5.RELEASE'
+    compile 'org.springframework:spring-core:4.3.5.RELEASE'
+    testCompile 'org.springframework:spring-test:4.3.5.RELEASE'
+    testCompile 'org.testng:testng:6.3.1'
+    compile 'org.glassfish.jersey.core:jersey-client:2.22.2'
+    compile 'org.glassfish.jersey.core:jersey-server:2.22.2'
+    compile 'org.glassfish.jersey.ext:jersey-spring3:2.22.2'
+    compile 'log4j:apache-log4j-extras:1.2.17'
+}

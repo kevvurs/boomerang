@@ -1,0 +1,6 @@
+# compiled #
+*.class
+
+# Archives Files #
+*.jar
+*.ear
