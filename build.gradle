@@ -12,6 +12,7 @@ dependencies {
     compile 'org.springframework:spring-context:4.3.5.RELEASE'
     compile 'org.springframework:spring-jdbc:4.3.5.RELEASE'
     compile 'org.springframework:spring-core:4.3.5.RELEASE'
+    compile 'org.springframework:spring-web:4.3.5.RELEASE'
     testCompile 'org.springframework:spring-test:4.3.5.RELEASE'
     testCompile 'org.testng:testng:6.3.1'
     compile 'org.glassfish.jersey.core:jersey-client:2.22.2'

@@ -4,3 +4,8 @@
 # Archives Files #
 *.jar
 *.ear
+
+# IDE Directs #
+/build/
+
+/WebContent/
