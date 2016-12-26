@@ -7,6 +7,6 @@
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
         <property name="ae-cloudsql.cloudsql-database-url" value="jdbc:google:mysql://boomerang-686:us-central1:cortex/ballots?user=root&amp;password=weatherly" />
-    <property name="ae-cloudsql.local-database-url" value="jdbc:mysql://google/ballots?cloudSqlInstance=boomerang-686:us-central1:cortex&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=weatherly&amp;useSSL=true" />
+    <property name="ae-cloudsql.local-database-url" value="jdbc:mysql://google/ballots?cloudSqlInstance=boomerang-686:us-central1:cortex&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=root&amp;password=weatherly&amp;useSSL=false" />
     </system-properties>
 </appengine-web-app>
