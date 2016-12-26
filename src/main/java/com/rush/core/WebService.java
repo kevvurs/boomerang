@@ -2,22 +2,27 @@ package com.rush.core;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.google.cloud.datastore.Transaction;
+import com.google.cloud.datastore.Datastore;
+import com.google.cloud.datastore.DatastoreOptions;
+import com.google.cloud.datastore.DateTime;
+import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.StringValue;
+import com.google.cloud.datastore.Key;
+import com.google.cloud.datastore.KeyFactory;
 
 @Path("/service")
 @Component
 public class WebService {
 	private static final Logger LOG = Logger.getLogger(WebService.class.getName());
 	private static final String PING = "OK";
-	private static final String RUNTIME_VERION = "com.google.appengine.runtime.version";
 	
 	@Value( "${rush.app.version}" )
 	private String appVersion;
@@ -26,49 +31,36 @@ public class WebService {
 	private String appProfile;
 	
 	@GET
+	@Produces( {MediaType.TEXT_PLAIN} )
     public String ping() {
         LOG.info("Ping invoked");
-        touchSQLServer();
-        return PING;
+        Key key = touchDatastore();
+        String string = touchDatastore(key);
+        return string;
     }
 	
-	private void touchSQLServer() {
-		// From https://cloud.google.com/appengine/docs/java/cloud-sql/
-		String url;
-		if (System.getProperty(RUNTIME_VERION).startsWith("Google App Engine/")) {
-			url = System.getProperty("ae-cloudsql.cloudsql-database-url");
-			try {
-		        // Load the class that provides the new "jdbc:google:mysql://" prefix.
-		        Class.forName("com.mysql.jdbc.GoogleDriver");
-		      } catch (ClassNotFoundException e) {
-		        LOG.warning("Error loading Google JDBC Driver- "+ e);
-		        url = null;
-		      }
-		} else {
-			// Set the url with the local MySQL database connection url when running locally
-		      url = System.getProperty("ae-cloudsql.local-database-url");
-		}
-		if (url == null) {
-			LOG.warning("Driver/Environment failed");
-			return;
-		}
-		LOG.info("Connecting to " + url);
-		String tables;
-		try {
-			StringBuilder stringBuilder = new StringBuilder();
-			Connection connection = DriverManager.getConnection(url);
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("show tables");
-			stringBuilder.append("Tables: ");
-			while(resultSet.next()) {
-				stringBuilder.append(resultSet.getString(1));
-				stringBuilder.append(',');
-			}
-			stringBuilder.setLength(stringBuilder.length() - 1);
-			tables = stringBuilder.toString();
-		} catch (SQLException e) {
-			tables = ("Error- " + e);
-		}
-		LOG.info(tables);
+	private Key touchDatastore() {
+		Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+		KeyFactory keyFactory = datastore.newKeyFactory().setKind("Anything");
+		Key key = datastore.allocateId(keyFactory.newKey());
+	    Entity task = Entity.newBuilder(key)
+	        .set("description", StringValue.newBuilder("literally, anything... LITERALLY! FUCKING OMG.").setExcludeFromIndexes(true).build())
+	        .set("created", DateTime.now())
+	        .set("done", true)
+	        .build();
+	    datastore.put(task);
+	    return key;
+	}
+	
+	private String touchDatastore(Key key) {
+		Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+		Entity entity = datastore.get(key);
+	    if (entity != null) {
+	    	LOG.info("retrieved!");
+	    	return entity.getString("description");
+	    } else {
+	    	LOG.warning("not retrieved...");
+	    	return "Null";
+	    }
 	}
 }
