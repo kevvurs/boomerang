@@ -18,13 +18,20 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	@Autowired
 	WebService webService;
 	
-	@Value( "${rush.version}" )
+	@Value( "${rush.app.version}" )
 	private String appVersion;
 	
+	@Value( "${rush.app.profile}" )
+	private String appProfile;
+	
+	// Test Constants //
+	@Value( "${rush.test.ping}" )
+	private String testPing;
 	
 	@Test()
 	public void valueTest() {
-		LOG.info("Testing values");
-		Assert.assertEquals(webService.ping(), "OK");
+		LOG.debug("Testing values");
+		Assert.assertEquals(webService.ping(), testPing);
+		LOG.debug("SUCCESS");
 	}
 }

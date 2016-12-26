@@ -13,8 +13,11 @@ public class WebService {
 	private static final Logger LOG = Logger.getLogger(WebService.class);
 	private static final String PING = "OK";
 	
-	@Value( "${rush.version}" )
+	@Value( "${rush.app.version}" )
 	private String appVersion;
+	
+	@Value( "${rush.app.profile}" )
+	private String appProfile;
 	
 	@GET
     public String ping() {
