@@ -10,10 +10,10 @@
        					   http://www.springframework.org/schema/util 
        					   http://www.springframework.org/schema/util/spring-util.xsd">  
     <context:annotation-config/>
-    	<context:component-scan base-package="com.rush">
+    	<context:component-scan base-package="com.boomerang">
     		<context:include-filter type="annotation" expression="javax.ws.rs.ext.Provider"/>
     		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     	</context:component-scan>
     <context:annotation-config/>
-    <context:property-placeholder location="classpath:rush-test.properties" />
+    <context:property-placeholder location="classpath:application-test.properties" />
  </beans>

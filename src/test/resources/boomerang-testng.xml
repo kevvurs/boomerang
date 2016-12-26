@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Rush Tesng Suite">
+<suite name="Boomerang Testng Suite">
     <test name="apiTest" preserve-order="false" >
         <packages>
-            <package name="com.rush.test"/>
+            <package name="com.boomerang.test"/>
         </packages>
     </test>
 </suite>

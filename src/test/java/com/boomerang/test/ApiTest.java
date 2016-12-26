@@ -1,4 +1,4 @@
-package com.rush.test;
+package com.boomerang.test;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.rush.core.WebService;
+import com.boomerang.core.LoginService;
 
 @Test
 @ContextConfiguration(locations = { "classpath:rush-test-context.xml" })
@@ -16,7 +16,7 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	private static final Logger LOG = Logger.getLogger(ApiTest.class);
 	
 	@Autowired
-	WebService webService;
+	LoginService webService;
 	
 	@Value( "${rush.app.version}" )
 	private String appVersion;

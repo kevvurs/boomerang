@@ -1,4 +1,4 @@
-package com.rush.core;
+package com.boomerang.core;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -18,10 +18,10 @@ import com.google.cloud.datastore.StringValue;
 import com.google.cloud.datastore.Key;
 import com.google.cloud.datastore.KeyFactory;
 
-@Path("/service")
+@Path("/login")
 @Component
-public class WebService {
-	private static final Logger LOG = Logger.getLogger(WebService.class.getName());
+public class LoginService {
+	private static final Logger LOG = Logger.getLogger(LoginService.class.getName());
 	private static final String PING = "OK";
 	
 	@Value( "${rush.app.version}" )
