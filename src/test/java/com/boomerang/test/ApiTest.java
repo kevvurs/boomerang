@@ -1,6 +1,7 @@
 package com.boomerang.test;
 
-import org.apache.log4j.Logger;
+import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
@@ -9,29 +10,39 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.boomerang.core.LoginService;
+import com.boomerang.dao.UserData;
+import com.boomerang.data.UserInfo;
+import com.boomerang.util.JsonAgent;
 
 @Test
-@ContextConfiguration(locations = { "classpath:rush-test-context.xml" })
+@ContextConfiguration(locations = { "classpath:boomerang-test-context.xml" })
 public class ApiTest extends AbstractTestNGSpringContextTests{
-	private static final Logger LOG = Logger.getLogger(ApiTest.class);
+	private static final Logger LOG = Logger.getLogger(ApiTest.class.getName());
 	
 	@Autowired
-	LoginService webService;
+	LoginService loginService;
 	
-	@Value( "${rush.app.version}" )
+	@Autowired
+	JsonAgent jsonAgent;
+	
+	@Autowired
+	UserData userData;
+	
+	@Value( "${boomerang.app.version}" )
 	private String appVersion;
 	
-	@Value( "${rush.app.profile}" )
+	@Value( "${boomerang.app.profile}" )
 	private String appProfile;
 	
 	// Test Constants //
-	@Value( "${rush.test.ping}" )
+	@Value( "${boomerang.test.ping}" )
 	private String testPing;
 	
 	@Test()
 	public void valueTest() {
-		LOG.debug("Testing values");
-		Assert.assertEquals(webService.ping(), testPing);
-		LOG.debug("SUCCESS");
+		LOG.info("Testing values");
+		Assert.assertEquals(appProfile, "test");
+
+		LOG.info("SUCCESS");
 	}
 }

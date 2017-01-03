@@ -16,8 +16,8 @@ apply plugin: 'com.google.cloud.tools.appengine'
 group = 'boomerang'
 version = '1.4'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
 	maven {
@@ -38,6 +38,7 @@ dependencies {
     compile 'org.glassfish.jersey.ext:jersey-spring3:2.22.2'
     testCompile 'org.testng:testng:6.3.1'
   	compile 'com.google.appengine:appengine:+'
+  	compile 'com.google.code.gson:gson:2.2.4'
 }
 
 appengine {
