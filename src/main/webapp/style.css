@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+     -ms-user-select: none;
+}
+
+*:active,
+*:hover {
+    cursor: default;
+}
+
+body.home {
+    background: url("architecture.jpg") no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    min-width: 424px;
+    margin: 0px;
+}
+
+div.home {
+    width: 100%;
+    text-align: center;
+}
+
+mark {
+	color: #2182D1;
+	background-color: #EEEEEE;
+}
+
+h1 {
+	cursor: default;
+	margin-top: 96px;
+	margin-bottom: 136px;
+	color: #FF3366;
+	text-outline: 1px 1px #000000;
+	font-family: 'Lato', mono;
+	font-size: 72px;
+	font-weight: bold;
+}
+
+h2 {
+	cursor: default;
+	color: #FF3333;
+	font-family: 'Lato', mono;
+	position: absolute;
+    left: 2px;
+    top: 2px;
+    text-shadow: 0 0 0.2em #424242, 0 0 0.2em #424242;
+}
+
+input.home {
+	background-color: #FF3366;
+	border: none;
+	color: #EEEEEE;
+	width: 200px;
+	padding: 12px 24px;
+	border-radius: 12px;
+	margin: 16px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: 'Lato', mono;
+	font-size: 20px;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+}
+
+input.home:hover {
+    background-color: #EEEEEE;
+    color: #333333;
+}
