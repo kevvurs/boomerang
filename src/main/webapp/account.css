@@ -9,3 +9,88 @@
 *:hover {
     cursor: default;
 }
+
+div.envelope {
+	margin-top: 16%;
+	margin-bottom: 16%;
+	margin-left: 8%;
+	margin-right: 8%;
+	text-align: right;
+}
+
+div.user {
+	float: left;
+	width: 48%;
+	overflow-y: auto;
+}
+
+
+div.info {
+	float: right;
+	width: 48%;
+	overflow-y: auto;
+	border: 0px 0px 0px 1px;
+	text-align: left;
+}
+
+input.field {
+	font-family: 'Lato', mono;
+	font-size: 14px;
+	font-style: italic;
+	background-color: #FFFFFF;
+	width: 90%;
+	margin: 5%;
+	padding: 12px 12px;
+	border-color: #6666FF;
+	border-radius: 24px;
+	outline: none;
+}
+
+#signin,#clearall {
+	background-color: #3333FF;
+	border: none;
+	color: #FFFFFF;
+	width: 40%;
+	padding: 12px 24px;
+	border-radius: 12px;
+	margin-top: 16px;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Lato', mono;
+	font-size: 20px;
+	display: inline-block;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	outline: none;
+}
+
+#signin:hover,#clearall:hover {
+    background-color: #333333;
+    color: #999999;
+}
+
+#clearall {
+	background-color: #FF33FF;
+	color: #FFFFFF;
+	margin-right: 0px;
+}
+
+h2 {
+	margin-top: 0px;
+	font-family: 'Lato', mono;
+	color: #333333;
+}
+
+p {
+	font-family: 'Lato', mono;
+	color: #333333;
+}
+
+b {
+	color: #FF3366;
+}
+
+hr {
+	clear: both;
+}
