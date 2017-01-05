@@ -11,8 +11,8 @@
 }
 
 div.envelope {
-	margin-top: 16%;
-	margin-bottom: 16%;
+	margin-top: 19%;
+	margin-bottom: 19%;
 	margin-left: 8%;
 	margin-right: 8%;
 	text-align: right;
@@ -20,14 +20,14 @@ div.envelope {
 
 div.user {
 	float: left;
-	width: 48%;
+	width: 47%;
 	overflow-y: auto;
 }
 
 
 div.info {
 	float: right;
-	width: 48%;
+	width: 47%;
 	overflow-y: auto;
 	border: 0px 0px 0px 1px;
 	text-align: left;
@@ -38,8 +38,8 @@ input.field {
 	font-size: 14px;
 	font-style: italic;
 	background-color: #FFFFFF;
-	width: 90%;
-	margin: 5%;
+	width: 84%;
+	margin: 4%;
 	padding: 12px 12px;
 	border-color: #6666FF;
 	border-radius: 24px;
@@ -50,6 +50,7 @@ input.field {
 	background-color: #3333FF;
 	border: none;
 	color: #FFFFFF;
+	margin: 2px;
 	width: 40%;
 	padding: 12px 24px;
 	border-radius: 12px;
@@ -67,13 +68,13 @@ input.field {
 
 #signin:hover,#clearall:hover {
     background-color: #333333;
-    color: #999999;
+    color: #FFFFFF;
 }
 
 #clearall {
 	background-color: #FF33FF;
 	color: #FFFFFF;
-	margin-right: 0px;
+	width: 30%;
 }
 
 h2 {
