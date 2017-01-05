@@ -46,7 +46,7 @@ input.field {
 	outline: none;
 }
 
-#signin,#clearall {
+#signin,#clearall,#register {
 	background-color: #3333FF;
 	border: none;
 	color: #FFFFFF;
@@ -66,7 +66,7 @@ input.field {
 	outline: none;
 }
 
-#signin:hover,#clearall:hover {
+#signin:hover,#clearall:hover,#register:hover {
     background-color: #333333;
     color: #FFFFFF;
 }
@@ -90,6 +90,10 @@ p {
 
 b {
 	color: #FF3366;
+}
+
+i {
+	color: #FF33FF;
 }
 
 hr {
