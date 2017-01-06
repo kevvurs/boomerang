@@ -27,6 +27,7 @@ $(function() {
     		success: function(userInfo) {
     			var userInfoSerial = JSON.stringify(userInfo);
     			sessionStorage.setItem("user",userInfoSerial);
+    			window.location = "./boomerang.html";
     		},
     		fail: function() {
     			alert("Error- ");
@@ -50,9 +51,14 @@ $(function() {
     	};
     	
     	var usernameValue = $('#username').val();
-    	var passwordValue = $('#password').val();
+    	var passwordValue = $('#password1').val();
     	
     	if (!usernameValue || !passwordValue) {
+    		failure();
+    		return;
+    	}
+    	
+    	if (!($('#password1').val() === $('#password2').val())) {
     		failure();
     		return;
     	}
@@ -72,6 +78,7 @@ $(function() {
     		success: function(userInfo) {
     			var userInfoSerial = JSON.stringify(userInfo);
     			sessionStorage.setItem("user",userInfoSerial);
+    			window.location = "./boomerang.html";
     		},
     		fail: function() {
     			failure();
