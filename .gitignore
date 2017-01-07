@@ -5,9 +5,11 @@
 *.jar
 *.ear
 
-# IDE Directs #
+# directories #
 /build/
-
 /WebContent/
 /bin/
 /.gradle/
+
+# kubuntu #
+*.kateproject
