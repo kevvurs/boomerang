@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Roboto');
+
+*:active,
+*:hover {
+    cursor: default;
+}
+
+body.home {
+    background-color: #FFFFFF;
+    min-width: 596px;
+    margin: 14px;
+}
+
+h1 {
+	cursor: default;
+	margin-bottom: 36px;
+	color: #6633FF;
+	text-outline: 1px 1px #000000;
+	font-family: 'Lato', mono;
+	font-size: 48px;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+h2 {
+	cursor: default;
+	color: #FF3333;
+	font-family: 'Lato', mono;
+	position: absolute;
+    left: 2px;
+    top: 2px;
+    text-shadow: 0 0 0.2em #424242, 0 0 0.2em #424242;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+div.connection {
+  float: left;
+  width: 27%;
+  height: 88%;
+  overflow-y: auto;
+  border: 1px solid #333333;
+}
+
+div.finder {
+  height: 108px;
+  padding: 12px;
+}
+
+input[type=search].finder {
+	background-color: #FFFFFF;
+	width: 208px;
+	padding: 8px 16px;
+	border: 2px solid #999999;
+	margin: 4px;
+	text-decoration: none;
+	display: inline-block;
+	font-family: 'Lato', mono;
+	font-size: 18px;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
+}
+
+input[type=search].finder:focus {
+    border: 2px solid #FF6633;
+}
+
+input[type=button].finder{
+	background-color: #333333;
+	border: none;
+	color: #FFFFFF;
+	margin: 2px;
+	padding: 10px 10px;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Lato', mono;
+	font-size: 16px;
+	display: inline-block;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+	-webkit-transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	outline: none;
+}
+
+input[type=button].finder:hover {
+    background-color: #FF6633;
+    color: #333333;
+}
+
+label {
+  color: #999999;
+  font-family: 'Lato', mono;
+  font-size: 24px;
+}
+
+p.notif {
+  float: left;
+  color: #FFFFFF;
+  background-color: #333333;
+  border: 2px solid #EEEEEE;
+  border-radius: 12px;
+  padding: 8px;
+  margin: 8px;
+  font-size: 14px;
+}
+
+table.footer {
+  clear: both;
+  color: #434343;
+  font-family: 'Lato', mono;
+}
