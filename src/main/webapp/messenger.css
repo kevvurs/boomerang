@@ -25,33 +25,40 @@ h1 {
 
 h2 {
 	cursor: default;
-	color: #FF3333;
+	color: #333333;
 	font-family: 'Lato', mono;
-	position: absolute;
-    left: 2px;
-    top: 2px;
-    text-shadow: 0 0 0.2em #424242, 0 0 0.2em #424242;
 	-webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 div.connection {
   float: left;
-  width: 27%;
-  height: 88%;
+  width: 308px;
+  height: 480px;
   overflow-y: auto;
   border: 1px solid #333333;
 }
 
 div.finder {
-  height: 108px;
+  height: 96px;
   padding: 12px;
+}
+
+div.verse {
+  text-align: center;
+}
+
+div.contact {
+  height: 80px;
+  margin: 12px;
+  padding: 12px;
+  border: 1px dashed #666666;
 }
 
 input[type=search].finder {
 	background-color: #FFFFFF;
-	width: 208px;
+	width: 176px;
 	padding: 8px 16px;
 	border: 2px solid #999999;
 	margin: 4px;
@@ -102,8 +109,30 @@ p.notif {
   border: 2px solid #EEEEEE;
   border-radius: 12px;
   padding: 8px;
-  margin: 8px;
-  font-size: 14px;
+  margin-top: 4px;
+  margin-left: 24px;
+  font-size: 12px;
+}
+
+p.contact {
+  display: inline;
+  color: #333333;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+p.online {
+  display: inline;
+  color: #0000FF;
+}
+
+p.offline {
+  color: #FF0000;
+}
+
+p.prevmsg {
+  font-style: italic;
+  color: #333333;
 }
 
 table.footer {

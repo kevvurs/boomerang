@@ -1,4 +1,6 @@
 var userToken;
+var selfDestruct;
+
 $( document ).ready(function() {
 	try{
 		userToken = JSON.parse(sessionStorage.getItem("user"));
@@ -11,16 +13,23 @@ $( document ).ready(function() {
 	}
 });
 
+// Open a new conversation.
 $(function() {
   $('#searchButton').on('click', function() {
 	var otherUser = $('#searchField').val();
 	if (!otherUser) {
 	  return;
 	}
-	
+	$('#searchField').val("");
 	var conversation = { user: userToken.username, other: otherUser };
+  // Dev
 	showUser(conversation.other, true);
-	$.ajax({
+  openConversation(conversation);
+  
+  return;
+	// end#
+  
+    $.ajax({
 		  url: "api/conv/exists",
 		  method: "POST",
 		  contentType: "application/json",
@@ -38,11 +47,14 @@ $(function() {
 
 function showUser(userName, exists) {
   var div = document.getElementById('searchDiv');
- 
+  clearNotif(div);
+  selfDestruct = setTimeout(clearNotif, 4000, div);
+  
   var notifMessage = document.createElement('p');
   notifMessage.setAttribute('class','notif');
   notifMessage.onclick = function() {
-	div.removeChild(notifMessage);
+	  clearNotif(div);
+    clearTimeout(selfDestruct);
   };
 
   if (exists) {
@@ -50,7 +62,39 @@ function showUser(userName, exists) {
   } else {
 	notifMessage.innerHTML = ("user not found");
   }
-  setTimeout(notifMessage.onclick, 4000);
 
   div.appendChild(notifMessage);
+}
+
+function clearNotif(div) {
+  var desc = div.children;
+  if (desc.length > 3) {
+    div.removeChild(desc[desc.length-1]);
+    clearNotif(div);
+  } else {
+    return;
+  }
+}
+
+function openConversation(conv) {
+  var div = document.getElementById('conversationDiv');
+  
+  var container = document.createElement('div');
+  var contactName = document.createElement('p');
+  var isOnline = document.createElement('p');
+  var lastMessage = document.createElement('p');
+  
+  container.setAttribute('class','contact');
+  contactName.setAttribute('class', 'contact');
+  isOnline.setAttribute('class', 'online');
+  lastMessage.setAttribute('class', 'prevmsg');
+  isOnline.innerHTML = "\u25bc";
+  contactName.innerHTML = conv.other;
+  lastMessage.innerHTML = "previous message here";
+  
+  container.appendChild(isOnline);
+  container.appendChild(contactName);
+  container.appendChild(lastMessage);
+  
+  div.appendChild(container);
 }
