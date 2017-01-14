@@ -1,4 +1,4 @@
-package com.boomerang.dao;
+package com.boomerang.os.dao;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 import org.springframework.stereotype.Repository;
 
-import com.boomerang.data.UserAuth;
-import com.boomerang.data.UserInfo;
+import com.boomerang.os.data.UserAuth;
+import com.boomerang.os.data.UserInfo;
 
 // Stateful psuedo-DB
 

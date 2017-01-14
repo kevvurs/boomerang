@@ -9,10 +9,10 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.boomerang.core.LoginService;
-import com.boomerang.dao.UserData;
-import com.boomerang.data.UserInfo;
-import com.boomerang.util.JsonAgent;
+import com.boomerang.os.service.AccountService;
+import com.boomerang.os.dao.UserData;
+import com.boomerang.os.data.UserInfo;
+import com.boomerang.os.util.JsonAgent;
 
 @Test
 @ContextConfiguration(locations = { "classpath:boomerang-test-context.xml" })
@@ -20,7 +20,7 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	private static final Logger LOG = Logger.getLogger(ApiTest.class.getName());
 	
 	@Autowired
-	LoginService loginService;
+	AccountService accountService;
 	
 	@Autowired
 	JsonAgent jsonAgent;
@@ -42,7 +42,7 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	public void valueTest() {
 		LOG.info("Testing values");
 		Assert.assertEquals(appProfile, "test");
-
+		
 		LOG.info("SUCCESS");
 	}
 }

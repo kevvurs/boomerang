@@ -1,4 +1,4 @@
-package com.boomerang.util;
+package com.boomerang.os.util;
 
 import java.util.logging.Logger;
 

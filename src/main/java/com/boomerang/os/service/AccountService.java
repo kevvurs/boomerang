@@ -1,4 +1,4 @@
-package com.boomerang.core;
+package com.boomerang.os.service;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -11,16 +11,16 @@ import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.boomerang.dao.UserData;
-import com.boomerang.data.UserAuth;
-import com.boomerang.data.UserInfo;
-import com.boomerang.util.JsonAgent;
-import com.boomerang.util.UserException;
+import com.boomerang.os.dao.UserData;
+import com.boomerang.os.data.UserAuth;
+import com.boomerang.os.data.UserInfo;
+import com.boomerang.os.util.JsonAgent;
+import com.boomerang.os.util.UserException;
 
 @Path("/user")
 @Component
-public class LoginService {
-	private static final Logger LOG = Logger.getLogger(LoginService.class.getName());
+public class AccountService {
+	private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 	
 	@Autowired
 	UserData userData;
@@ -28,7 +28,7 @@ public class LoginService {
 	@Autowired
 	JsonAgent jsonAgent;
 	
-	public LoginService() {
+	public AccountService() {
 		LOG.info("loginService instantiated");
 	}
 	
@@ -72,4 +72,4 @@ public class LoginService {
 		userData.pushUser(userInfo);
 		return "{}";
 	}
-}
+} 

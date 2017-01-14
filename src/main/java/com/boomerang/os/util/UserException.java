@@ -1,4 +1,4 @@
-package com.boomerang.util;
+package com.boomerang.os.util;
 
 public class UserException extends Exception {
 	private static final long serialVersionUID = -5325136878718862278L;

@@ -9,6 +9,9 @@
 /build/
 /WebContent/
 /bin/
+/build/
+/gradlew/
+/gradle/
 /.gradle/
 
 # kubuntu #
