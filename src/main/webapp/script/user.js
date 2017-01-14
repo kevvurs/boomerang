@@ -26,7 +26,7 @@ $(function() {
     		dataType: "json",
     		success: function(userInfo) {
     			var userInfoSerial = JSON.stringify(userInfo);
-    			sessionStorage.setItem("user",userInfoSerial);
+    			sessionStorage.setItem("boomerang.user",userInfoSerial);
     			window.location = "./boomerang.html";
     		},
     		fail: function() {
@@ -77,7 +77,7 @@ $(function() {
     		dataType: "json",
     		success: function(userInfo) {
     			var userInfoSerial = JSON.stringify(userInfo);
-    			sessionStorage.setItem("user",userInfoSerial);
+    			sessionStorage.setItem("boomerang.user",userInfoSerial);
     			window.location = "./boomerang.html";
     		},
     		fail: function() {

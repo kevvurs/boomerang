@@ -61,4 +61,15 @@ public class LoginService {
 			throw new UserException("incorrect username or password");
 		}
 	}
+	
+	@POST
+	@Path("/logout")
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String logout(String request) throws UserException {
+		UserInfo userInfo = jsonAgent.deserialize(request, UserInfo.class);
+		userInfo.setOnline(false);
+		userData.pushUser(userInfo);
+		return "{}";
+	}
 }

@@ -29,6 +29,9 @@ public class UserData {
 		if (!userExists(user.getUsername())) {
 			UserInfo userInfo = new UserInfo();
 			userInfo.setUser(user);
+			userInfo.setConversation(user.getUsername());
+			userInfo.getFriends().add(user.getUsername());
+			userInfo.setOnline(false);
 			this.userbase.add(userInfo);
 			return true;
 		} else {
@@ -50,6 +53,7 @@ public class UserData {
 	public UserInfo signIn(UserAuth user) {
 		UserInfo userInfo = fetchUser(user.getUsername());
 		if (userInfo != null && validateUser(user, userInfo)) {
+			userInfo.setOnline(true);
 			return userInfo;
 		} else {
 			return null;
