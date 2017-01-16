@@ -12,3 +12,11 @@ $( document ).ready(function() {
 		window.location = "./index.html"
 	}
 });
+
+$( '#sidebar' ).on('click', function() {
+
+});
+
+$( '#appFacebook' ).on('click', function() {
+  
+});

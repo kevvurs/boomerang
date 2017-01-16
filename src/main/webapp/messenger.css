@@ -5,19 +5,26 @@
     cursor: default;
 }
 
-body.home {
+body {
+	background: url("PGC3074547.jpg") no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-color: #FFFFFF;
     min-width: 596px;
-    margin: 14px;
+    margin: 0px;
 }
 
 h1 {
 	cursor: default;
-	margin-bottom: 36px;
+	margin: 1px;
+	padding: 1px;
 	color: #6633FF;
-	text-outline: 1px 1px #000000;
+	text-outline: 1px 1px #FFFFFF;
 	font-family: 'Lato', mono;
 	font-size: 48px;
+	float: right;
 	-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -30,6 +37,22 @@ h2 {
 	-webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+}
+
+#sidebar {
+  width: 56px;
+  height: 100vh;
+  padding-top: 12px;
+  overflow-y: auto;
+  background-color: #333333;
+  float: left;
+  text-align: center;
+  border-right: 4px solid #CCCCCC;
+}
+
+.app {
+  display: inline-block;
+  padding: 8px;
 }
 
 div.connection {
