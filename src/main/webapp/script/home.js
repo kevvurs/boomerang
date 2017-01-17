@@ -1,7 +1,6 @@
 var entrance = function(user) {
   if (user) {
-	var user = this.auth().currentUser;
-	this.userToken = this.auth.currentUser.uid;
+	var userToken = user.uid;
 	this.database.ref('/users/' + userToken).once('value').then(function(snapshot) {
 	  if (!snapshot.val()) {
 		// Register
