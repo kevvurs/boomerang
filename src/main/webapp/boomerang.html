@@ -6,11 +6,23 @@
 		<link rel="icon" type="image/png" href="favicon.png">
 		<link rel="stylesheet" href="messenger.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+		<script>
+		  var config = {
+			apiKey: "AIzaSyDzS133LwNBIszgiDKJ1KTH5TXAoltodwA",
+			authDomain: "boomerang-686.firebaseapp.com",
+			databaseURL: "https://boomerang-686.firebaseio.com",
+			storageBucket: "boomerang-686.appspot.com",
+			messagingSenderId: "1051306301228"
+		  };
+		  firebase.initializeApp(config);
+		</script>
 		<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<h1>boomerang</h1>
 		<div id="sidebar">
+		<input id="sysExit" class="app" type="image" src="icons/exit.png" alt="Facebook">
 		  <input id="appFacebook" class="app" type="image" src="icons/fb.png" alt="Facebook">
 		</div>
 		<script src="script/main.js"></script>

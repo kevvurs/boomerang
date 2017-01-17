@@ -10,6 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.boomerang.os.service.AccountService;
+import com.boomerang.os.security.Encryption;
 import com.boomerang.os.dao.UserData;
 import com.boomerang.os.data.UserInfo;
 import com.boomerang.os.util.JsonAgent;
@@ -28,6 +29,9 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	@Autowired
 	UserData userData;
 	
+	@Autowired
+	Encryption encryption;
+	
 	@Value( "${boomerang.app.version}" )
 	private String appVersion;
 	
@@ -42,6 +46,12 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	public void valueTest() {
 		LOG.info("Testing values");
 		Assert.assertEquals(appProfile, "test");
+		
+		LOG.info("Testing encryption");
+		String password = "password";
+		String encrPass = encryption.encode(password);
+		LOG.info("Encrypted: " + encrPass);
+		Assert.assertEquals(encryption.decode(encrPass),password);
 		
 		LOG.info("SUCCESS");
 	}
