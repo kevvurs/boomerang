@@ -1,26 +1,31 @@
+var auth, database, storage;
+
 var entrance = function(user) {
   if (user) {
 	var userToken = user.uid;
-	this.database.ref('/users/' + userToken).once('value').then(function(snapshot) {
-	  if (!snapshot.val()) {
-		// Register
+	database.ref('/users/' + userToken).once('value').then(function(snapshot) {
+	  if (!snapshot.val() || !snapshot.val().created) {
 		this.database.ref('users/' + userToken).set({
+		  created: true,
 		  appsInstalled: "facebook"
 		});
+	    window.location = "./boomerang";
+	  } else {
+		console.log('welcome back');
+		window.location = "./boomerang";
 	  }
 	});
-	window.location = "./boomerang.html";
   }
 }
 
 $(function() {
   $('#login').on('click', function() {
-	this.auth = firebase.auth();
-	this.database = firebase.database();
-	this.storage = firebase.storage();
-	this.auth.onAuthStateChanged(entrance.bind(this));
+	auth = firebase.auth();
+	database = firebase.database();
+	storage = firebase.storage();
+	auth.onAuthStateChanged(entrance.bind(this));
 	var provider = new firebase.auth.GoogleAuthProvider();
-	this.auth.signInWithPopup(provider);
+	auth.signInWithPopup(provider);
   });
 });
 
