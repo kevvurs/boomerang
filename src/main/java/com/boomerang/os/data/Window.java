@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "Window")
 public class Window {
-	@XmlElement(type = Double.class)
-	protected Double width;
-	@XmlElement(type = Double.class)
-	protected Double height;
+	@XmlElement(type = Integer.class)
+	protected Integer width;
+	@XmlElement(type = Integer.class)
+	protected Integer height;
 	@XmlElement(type = Boolean.class)
 	protected Boolean fullscreen;
 	
@@ -27,19 +27,19 @@ public class Window {
 		// Zero Args.
 	}
 	
-	public Double getWidth() {
+	public Integer getWidth() {
 		return this.width;
 	}
 	
-	public void setWidth(double width) {
+	public void setWidth(int width) {
 		this.width = width;
 	}
 	
-	public Double getHeight() {
+	public Integer getHeight() {
 		return this.height;
 	}
 	
-	public void setHeight(double height) {
+	public void setHeight(int height) {
 		this.height = height;
 	}
 

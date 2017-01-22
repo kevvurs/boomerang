@@ -34,7 +34,7 @@ public class App {
 	  return this.window;
 	}
 	
-	public void setAuthor(Window window) {
+	public void setWindow(Window window) {
 	  this.window = window;
 	}
 	

@@ -6,7 +6,7 @@
 }
 
 body {
-	background: url("PGC3074547.jpg") no-repeat center center fixed;
+	background: url("./../pic/PGC3074547.jpg") no-repeat center center fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -80,6 +80,12 @@ div.contact {
   border: 1px dashed #666666;
 }
 
+.appWin {
+	position: absolute;
+    left: 32px;
+    top: 32px;
+}
+
 input[type=search].finder {
 	background-color: #FFFFFF;
 	width: 176px;
@@ -124,34 +130,6 @@ label {
   color: #999999;
   font-family: 'Lato', mono;
   font-size: 24px;
-}
-
-p.notif {
-  float: left;
-  color: #FFFFFF;
-  background-color: #333333;
-  border: 2px solid #EEEEEE;
-  border-radius: 12px;
-  padding: 8px;
-  margin-top: 4px;
-  margin-left: 24px;
-  font-size: 12px;
-}
-
-p.contact {
-  display: inline;
-  color: #333333;
-  font-weight: bold;
-  font-size: 24px;
-}
-
-p.online {
-  display: inline;
-  color: #0000FF;
-}
-
-p.offline {
-  color: #FF0000;
 }
 
 p.prevmsg {

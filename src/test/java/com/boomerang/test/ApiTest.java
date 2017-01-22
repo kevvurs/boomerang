@@ -21,16 +21,7 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	private static final Logger LOG = Logger.getLogger(ApiTest.class.getName());
 	
 	@Autowired
-	AccountService accountService;
-	
-	@Autowired
 	JsonAgent jsonAgent;
-	
-	@Autowired
-	UserData userData;
-	
-	@Autowired
-	Encryption encryption;
 	
 	@Value( "${boomerang.app.version}" )
 	private String appVersion;
@@ -47,11 +38,8 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 		LOG.info("Testing values");
 		Assert.assertEquals(appProfile, "test");
 		
-		LOG.info("Testing encryption");
-		String password = "password";
-		String encrPass = encryption.encode(password);
-		LOG.info("Encrypted: " + encrPass);
-		Assert.assertEquals(encryption.decode(encrPass),password);
+		LOG.info("Testing windows");
+		
 		
 		LOG.info("SUCCESS");
 	}
