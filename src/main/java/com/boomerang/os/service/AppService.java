@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Path("/app")
@@ -21,6 +22,9 @@ public class AppService {
 	
 	@Autowired
 	JsonAgent jsonAgent;
+	
+	@Value( "${boomerang.app.facebook}" )
+	String facebookLink;
 	
 	public AppService() {
 		LOG.info("appService instantiated");
@@ -33,7 +37,7 @@ public class AppService {
 		App app = new App();
 		app.setWindow(mkWindow());
 		app.setIcon("icons/fb.png");
-		app.setTarget("www.facebook.com");
+		app.setTarget(facebookLink);
 		return jsonAgent.serialize(app);
 	}
 	

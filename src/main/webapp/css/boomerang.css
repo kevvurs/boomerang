@@ -50,10 +50,18 @@ h2 {
   border-right: 4px solid #CCCCCC;
 }
 
-.app {
+input.app {
   display: inline-block;
   padding: 8px;
+  width: 32px;
+  height: 32px;
   outline-color: #FFFFFF;
+}
+
+input.app:hover {
+  padding: 4px;
+  width: 36px;
+  height: 36px;
 }
 
 div.connection {

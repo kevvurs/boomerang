@@ -27,29 +27,31 @@ $(function() {
 
 $(function() {
 	$( '#appFacebook' ).on('click', function() {
-		var appInstance = openApp('api/app/facebook');
-		if (appInstance) {
-			openWindow(appInstance);
-		} else {
-			alert('error');
-		}
+		var dataReq = mkXMLRequest('api/app/facebook');
+		var appInstance = $.ajax(dataReq);
 	});
 });
 
-$(function openApp(appURL) {
-	$.ajax({
+
+function mkXMLRequest(appURL) {
+	var settings = 
+	{
         type: 'GET',
         url: appURL,
         dataType: 'json',
         success: function(data) {
-        	return data;
+	    	if (data) {
+				openWindow(data);
+			} else {
+				console.log('client-side error');
+			}
         },
-        error: function(a,b,c) {
-            console.log('web error: '+ c);
-            return null;
+        error: function(E) {
+            console.log('server-side error');
         }
-	});
-});
+	};
+	return settings;
+}
 
 function openWindow(appData) {
 	var frame = document.createElement('iframe');
