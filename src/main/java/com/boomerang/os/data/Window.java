@@ -27,6 +27,18 @@ public class Window {
 		// Zero Args.
 	}
 	
+	public Window(Integer width, Integer height, Boolean fullscreen) {
+	  this.width = width;
+	  this.height = height;
+	  this.fullscreen = fullscreen;
+	}
+	
+	public Window(int width, int height, boolean fullscreen) {
+	  this.width = width;
+	  this.height = height;
+	  this.fullscreen = fullscreen;
+	}
+	
 	public Integer getWidth() {
 		return this.width;
 	}

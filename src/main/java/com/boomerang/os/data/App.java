@@ -27,6 +27,12 @@ public class App {
 	  // Zero Args.
 	}
 	
+	public App(Window window, String target, String icon) {
+	  this.window = window;
+	  this.target = target;
+	  this.icon = icon;
+	}
+	
 	public Window getWindow() {
 	  if (this.window == null) {
 		  this.window = new Window();

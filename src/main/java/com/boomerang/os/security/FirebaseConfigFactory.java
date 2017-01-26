@@ -1,13 +1,20 @@
 package com.boomerang.os.security;
 
+import java.io.InputStream;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import com.google.firebase.auth.FirebaseCredentials;
+import com.google.firebase.auth.FirebaseCredential;
+import com.google.firebase.FirebaseOptions;
 
 import com.boomerang.os.data.FirebaseConfig;
 
 @Component
 public class FirebaseConfigFactory {
-
+  private static final String RES = "src/main/resources/";
+  
   @Value( "${boomerang.firebase.apikey}" )
   String apikey;
 
@@ -23,6 +30,9 @@ public class FirebaseConfigFactory {
   @Value( "${boomerang.firebase.messagingsenderid}" )
   String messagingsenderid;
 
+  @Value( "${boomerang.firebase.keyname}" )
+  String key;
+
   public FirebaseConfigFactory() {
 	// Zero args.
   }
@@ -35,5 +45,18 @@ public class FirebaseConfigFactory {
 	config.setStorageBucket(storagebucket);
 	config.setMessagingSenderId(messagingsenderid);
 	return config;
+  }
+  
+  public FirebaseOptions mkOptions() {
+	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	InputStream cert = classLoader.getResourceAsStream(RES + key);
+	FirebaseCredential credentials = FirebaseCredentials.fromCertificate(cert);
+	
+	FirebaseOptions options = new FirebaseOptions.Builder()
+	.setCredential(credentials)
+	.setDatabaseUrl("https://boomerang-686.firebaseio.com")
+	.build();
+
+	return options;
   }
 }

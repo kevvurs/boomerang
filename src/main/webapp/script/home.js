@@ -7,16 +7,29 @@ var entrance = function(user) {
 	  if (!snapshot.val() || !snapshot.val().created) {
 		this.database.ref('users/' + userToken).set({
 		  created: true,
-		  appsInstalled: "facebook"
+		  name: user.displayName
 		});
 	    window.location = "./boomerang.html";
 	  } else {
-		console.log('welcome back');
 		window.location = "./boomerang.html";
 	  }
 	});
   }
 }
+
+$( window ).on('load', function() {
+  $.ajax({
+	type: 'GET',
+	url: 'api/firebase/config',
+	dataType: 'json',
+	success: function(config) {
+	  firebase.initializeApp(config);
+	},
+	error: function(E) {
+	  console.log('server-side error');
+	}
+  });
+});
 
 $(function() {
   $('#login').on('click', function() {
@@ -29,18 +42,8 @@ $(function() {
   });
 });
 
-function activateFirebase() {
-	$.ajax({
-        type: 'GET',
-        url: 'api/firebase/config',
-        dataType: 'json',
-        success: function(config) {
-        	firebase.initializeApp(config);
-        	return true;
-        },
-        error: function(a,b,c) {
-            console.log('web error: '+ c);
-            return false;
-        }
-	});
-}
+$(function() {
+  $('#guest').on('click', function() {
+	window.location = "./boomerang.html";
+  });
+});

@@ -16,3 +16,6 @@
 
 # kubuntu #
 *.kateproject
+
+# keys #
+*.json

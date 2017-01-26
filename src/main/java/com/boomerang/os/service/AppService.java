@@ -23,21 +23,21 @@ public class AppService {
 	@Autowired
 	JsonAgent jsonAgent;
 	
-	@Value( "${boomerang.app.facebook}" )
-	String facebookLink;
+	@Value( "${boomerang.app.bing}" )
+	String bingLink;
 	
 	public AppService() {
 		LOG.info("appService instantiated");
 	}
 	
 	@GET
-	@Path("/facebook")
+	@Path("/bing")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String getFacebook() {
 		App app = new App();
 		app.setWindow(mkWindow());
-		app.setIcon("icons/fb.png");
-		app.setTarget(facebookLink);
+		app.setIcon("icons/bing.png");
+		app.setTarget(bingLink);
 		return jsonAgent.serialize(app);
 	}
 	
