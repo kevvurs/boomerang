@@ -1,6 +1,10 @@
 package com.boomerang.os.dao;
 
 import javax.annotation.PostConstruct;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.springframework.stereotype.Repository;
@@ -23,6 +27,7 @@ public class FirebaseDAO {
   private static final Logger LOG = Logger.getLogger(FirebaseDAO.class.getName());
   private FirebaseDatabase database;
   DatabaseReference appRef;
+  Map<String, App> appMap;
   
   @Autowired
   FirebaseConfigFactory firebaseConfigFactory;
@@ -30,11 +35,12 @@ public class FirebaseDAO {
   public FirebaseDAO() {
 	LOG.info("firebaseDAO instantiated");
 	database = null;
+	appMap = new HashMap<>();
   }
 
   @PostConstruct
   public void init() {
-	LOG.info("Attempting to connect to Firebase...");
+	LOG.info("connecting to Firebase...");
 	try {
 	  FirebaseOptions options = firebaseConfigFactory.mkOptions();
 	  FirebaseApp.initializeApp(options);
@@ -42,45 +48,36 @@ public class FirebaseDAO {
 	} catch (Exception e) {
 	  LOG.warning("Firebase not connected- " + e);
 	}
-	appRef = database.getReference("boomerang-686/app");
+	appRef = database.getReference("app");
 	appRef.addValueEventListener(new ValueEventListener() {
 	  @Override
 	  public void onDataChange(DataSnapshot dataSnapshot) {
+		LOG.info("onDataChange");
         App app = dataSnapshot.getValue(App.class);
         if (app == null) {
-		  LOG.info("null");
+		  LOG.info("app:null");
         } else {
-		  LOG.info(app.getTarget());
+		  LOG.info("app:" + dataSnapshot.getKey());
+		  appMap.put(dataSnapshot.getKey(), app);
         }
 	  }
 
 	  @Override
 	  public void onCancelled(DatabaseError databaseError) {
-		LOG.info("firebase cancel invoked");
+		LOG.info("app:cancel invoked");
 	  }
 	});
   }
   
-  public String test() {
-	StringBuilder builder = new StringBuilder();
-	builder.append('>');
-	DatabaseReference ref = database.getReference("boomerang-686/app");
-	ref.addValueEventListener(new ValueEventListener() {
-	  @Override
-	  public void onDataChange(DataSnapshot dataSnapshot) {
-        App app = dataSnapshot.getValue(App.class);
-        if (app == null) {
-		  builder.append("null");
-        } else {
-		  builder.append(app.getTarget());
-        }
+  public App getApp(String appName) {
+	  if (appMap.containsKey(appName)) {
+		  return appMap.get(appName);  
+	  } else {
+		  return null;
 	  }
-
-	  @Override
-	  public void onCancelled(DatabaseError databaseError) {
-		builder.append("firebase cancel invoked");
-	  }
-	});
-	return builder.toString();
+  }
+  
+  public Collection<String> getAppKeys() {
+	  return appMap.keySet();
   }
 }

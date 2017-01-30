@@ -13,6 +13,7 @@ import com.boomerang.os.data.FirebaseConfig;
 
 @Component
 public class FirebaseConfigFactory {
+	//LOG
   private static final String RES = "src/main/resources/";
   
   @Value( "${boomerang.firebase.apikey}" )
@@ -51,12 +52,18 @@ public class FirebaseConfigFactory {
 	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 	InputStream cert = classLoader.getResourceAsStream(RES + key);
 	FirebaseCredential credentials = FirebaseCredentials.fromCertificate(cert);
-	
+	// TODO: null check
 	FirebaseOptions options = new FirebaseOptions.Builder()
 	.setCredential(credentials)
 	.setDatabaseUrl("https://boomerang-686.firebaseio.com")
 	.build();
-
+	
 	return options;
+  }
+  
+  public InputStream mkCertificate() {
+	ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+	InputStream cert = classLoader.getResourceAsStream(key);
+	return cert;
   }
 }

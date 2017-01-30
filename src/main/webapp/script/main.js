@@ -86,6 +86,8 @@ function openWindow(appData) {
 	  container.width = appData.window.width;
 	}
 	frame.src = appData.target;
+	frame.width = container.width;
+	frame.height = container.height - 36;
 	byline.innerHTML = "TITLE";
 	menubar.appendChild(byline);
 	container.appendChild(menubar);

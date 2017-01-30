@@ -1,5 +1,7 @@
 package com.boomerang.test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.testng.annotations.Test;
 
 import com.boomerang.os.service.AccountService;
 import com.boomerang.os.security.Encryption;
+import com.boomerang.os.security.FirebaseConfigFactory;
 import com.boomerang.os.dao.FirebaseDAO;
 import com.boomerang.os.data.UserInfo;
 import com.boomerang.os.util.JsonAgent;
@@ -28,6 +31,9 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	@Autowired
 	FirebaseDAO firebaseDAO;
 	
+	@Autowired
+	FirebaseConfigFactory firebaseConfigFactory;
+	
 	@Value( "${boomerang.app.version}" )
 	private String appVersion;
 	
@@ -42,10 +48,21 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
 	public void valueTest() {
 		LOG.info("Testing values");
 		Assert.assertEquals(appProfile, "test");
+		StringBuilder cert = new StringBuilder();
+		InputStream ins = firebaseConfigFactory.mkCertificate();
+		int nx;
+		char c;
+		try {
+			while ((nx = ins.read()) != -1) {
+				c = (char)nx;
+				cert.append(c);
+			}
+			ins.close();
+		} catch (IOException e) {
+			LOG.warning("cannot read certificate- " + e);
+		}
 		
-		LOG.info("Testing Firebase");
-		String out = firebaseDAO.test();
-		LOG.info(out);
+		LOG.info(cert.toString());
 		LOG.info("SUCCESS");
 	}
 }
