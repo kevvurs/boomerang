@@ -1,68 +1,49 @@
 package com.boomerang.test;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.boomerang.os.service.AccountService;
-import com.boomerang.os.security.Encryption;
-import com.boomerang.os.security.FirebaseConfigFactory;
-import com.boomerang.os.dao.FirebaseDAO;
-import com.boomerang.os.data.UserInfo;
-import com.boomerang.os.util.JsonAgent;
+import com.boomerang.os.service.AppService;
+import com.boomerang.os.dao.GoogleFinance;
+import com.boomerang.os.mind.StockMarketRNN;
+import com.boomerang.os.util.JsonHandler;
 
 
 @Test
 @ContextConfiguration(locations = { "classpath:boomerang-test-context.xml" })
 public class ApiTest extends AbstractTestNGSpringContextTests{
 	private static final Logger LOG = Logger.getLogger(ApiTest.class.getName());
+	private static final String PING = "OK";
+	private static final String SYMBOL = "SHLD";
 	
 	@Autowired
-	JsonAgent jsonAgent;
+	JsonHandler jsonAgent;
 	
 	@Autowired
-	FirebaseDAO firebaseDAO;
+	GoogleFinance googleFinance;
 	
 	@Autowired
-	FirebaseConfigFactory firebaseConfigFactory;
+	StockMarketRNN stockMarketRNN;
 	
-	@Value( "${boomerang.app.version}" )
-	private String appVersion;
-	
-	@Value( "${boomerang.app.profile}" )
-	private String appProfile;
-	
-	// Test Constants //
-	@Value( "${boomerang.test.ping}" )
-	private String testPing;
+	@Autowired
+	AppService appService;
 	
 	@Test()
 	public void valueTest() {
-		LOG.info("Testing values");
-		Assert.assertEquals(appProfile, "test");
-		StringBuilder cert = new StringBuilder();
-		InputStream ins = firebaseConfigFactory.mkCertificate();
-		int nx;
-		char c;
-		try {
-			while ((nx = ins.read()) != -1) {
-				c = (char)nx;
-				cert.append(c);
-			}
-			ins.close();
-		} catch (IOException e) {
-			LOG.warning("cannot read certificate- " + e);
-		}
+		LOG.info("Testing API");
+		String testPing = appService.ping();
+		Assert.assertEquals(testPing,PING);
 		
-		LOG.info(cert.toString());
+		List<String> stockData = googleFinance.fetchData(SYMBOL);
+		LOG.info("Data units imported: " + stockData.size());
+		stockMarketRNN.learn(stockData);
+
 		LOG.info("SUCCESS");
 	}
 }

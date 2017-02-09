@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
 @Component
-public class JsonAgent {
-	private static final Logger LOG = Logger.getLogger(JsonAgent.class.getName());
+public class JsonHandler {
+	private static final Logger LOG = Logger.getLogger(JsonHandler.class.getName());
 	
 	public <T> T deserialize(String jstr, Class<T> jcls) {
         try{
