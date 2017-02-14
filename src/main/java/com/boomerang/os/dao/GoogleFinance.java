@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public class GoogleFinance {
 		try {
 			ref = mkURL(symbol);
 		} catch (MalformedURLException e) {
-			LOG.severe("URL is malformed- " + datasource + symbol);
+			LOG.log(Level.SEVERE, "URL is malformed- {0}{1}", new String[]{datasource, symbol});
 			return data;
 		}
 		
@@ -46,7 +47,7 @@ public class GoogleFinance {
 			data = rd.lines().collect(Collectors.toList());
 			rd.close();
 		} catch (IOException e) {
-			LOG.severe("Error fetching data- " + e.getMessage());
+			LOG.log(Level.SEVERE, "Error fetching data- {0}", e.getMessage());
 		}
 		return data;
 	}

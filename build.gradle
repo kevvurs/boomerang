@@ -67,4 +67,5 @@ test {
 	useTestNG {
         suites 'src/test/resources/boomerang-testng.xml'
     } 
+    testLogging.showStandardStreams = true
 }
