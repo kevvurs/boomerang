@@ -79,6 +79,9 @@ public class StockMarketRNN {
     @Value( "${boomerang.mind.activation}" )
     String activation;
     
+    @Value( "${boomerang.mind.weightinit}" )
+    String weightinit;
+    
     @Value( "${boomerang.mind.loss}" )
     String loss;
 
@@ -125,13 +128,21 @@ public class StockMarketRNN {
             dataSetIterator.reset();
         }
         
-        INDArray init = Nd4j.ones(1,1,5);
-        for (int n = 0; n < 5; n++){
-            init.putScalar(0, 0, n, quote);
-            //init.putScalar(1, 0, n, quote);
+        // Get recent window.
+        DataSet recentData = new DataSet();
+        while (dataSetIterator.hasNext()) {
+            recentData = dataSetIterator.next(7);
+            if (dataSetIterator.hasNext()) {
+                if (dataSetIterator.next().numExamples() < 7) {
+                    break;
+                } else if (!dataSetIterator.hasNext()) break;
+            }
         }
-        norm.transform(init);
-        INDArray forecast = rnn.rnnTimeStep(init);
+        recentData = expandDims(recentData);
+        norm.fit(recentData);
+        norm.preProcess(recentData);
+        rnn.rnnClearPreviousState();
+        INDArray forecast = rnn.rnnTimeStep(recentData.getFeatures());
         norm.revertFeatures(forecast);
         shutdown(rec);
         return forecast;
@@ -145,7 +156,7 @@ public class StockMarketRNN {
             .seed(seed) 
             .regularization(true) 
             .l2(l2) 
-            .weightInit(WeightInit.XAVIER) 
+            .weightInit(WeightInit.valueOf(weightinit)) 
             .updater(Updater.RMSPROP) 
             .list() 
             .layer(0, new GravesLSTM.Builder().nIn(inputcolumns).nOut(lstmnodes) 
@@ -189,7 +200,6 @@ public class StockMarketRNN {
                 NDArrayIndex.point(i)};
             r3.put(target,timeDataCol);
         }
-        readArray(r3);
         return r3;
     }
 	
