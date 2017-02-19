@@ -1,4 +1,4 @@
-package com.boomerang.os.util;
+package com.boomerang.rnn.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

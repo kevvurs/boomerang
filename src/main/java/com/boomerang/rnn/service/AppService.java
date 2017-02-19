@@ -1,8 +1,8 @@
-package com.boomerang.os.service;
+package com.boomerang.rnn.service;
 
-import com.boomerang.os.util.JsonHandler;
-import com.boomerang.os.dao.GoogleFinance;
-import com.boomerang.os.data.Window;
+import com.boomerang.rnn.dao.GoogleFinance;
+import com.boomerang.rnn.data.Window;
+import com.boomerang.rnn.util.JsonHandler;
 
 import java.util.logging.Logger;
 

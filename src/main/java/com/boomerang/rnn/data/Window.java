@@ -1,4 +1,4 @@
-package com.boomerang.os.data;
+package com.boomerang.rnn.data;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

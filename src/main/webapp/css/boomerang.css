@@ -6,11 +6,6 @@
 }
 
 body {
-	background: url("./../pic/PGC3074547.jpg") no-repeat center center fixed;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-color: #FFFFFF;
     min-width: 596px;
     margin: 0px;

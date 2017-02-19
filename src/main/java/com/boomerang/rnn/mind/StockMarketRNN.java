@@ -1,4 +1,4 @@
-package com.boomerang.os.mind;
+package com.boomerang.rnn.mind;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,7 +34,7 @@ import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.boomerang.os.util.Interpreter;
+import com.boomerang.rnn.util.Interpreter;
 
 @Component
 public class StockMarketRNN {

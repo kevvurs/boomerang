@@ -1,4 +1,4 @@
-package com.boomerang.os.dao;
+package com.boomerang.rnn.dao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

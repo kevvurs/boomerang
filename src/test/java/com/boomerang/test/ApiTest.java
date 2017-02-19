@@ -10,11 +10,12 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.boomerang.os.service.AppService;
-import com.boomerang.os.dao.GoogleFinance;
-import com.boomerang.os.mind.StockMarketRNN;
-import com.boomerang.os.util.JsonHandler;
-import com.boomerang.os.util.Interpreter;
+import com.boomerang.rnn.dao.GoogleFinance;
+import com.boomerang.rnn.mind.StockMarketRNN;
+import com.boomerang.rnn.service.AppService;
+import com.boomerang.rnn.util.Interpreter;
+import com.boomerang.rnn.util.JsonHandler;
+
 import java.io.IOException;
 import org.datavec.api.records.reader.BaseRecordReader;
 import org.datavec.api.records.reader.impl.collection.ListStringRecordReader;
