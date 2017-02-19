@@ -44,6 +44,6 @@ public class AppService {
 	@GET
 	@Path("{symbol}")
 	public String stockMarketAnalysis(@PathParam("symbol") String symbol) {
-		return pingStatus;
+		return symbol;
 	}
 }
