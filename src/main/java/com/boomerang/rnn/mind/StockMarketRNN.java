@@ -76,6 +76,9 @@ public class StockMarketRNN {
     @Value( "${boomerang.mind.epochs}" )
     int epochs;
     
+    @Value( "${boomerang.mind.projection}" )
+    int projection;
+    
     @Value( "${boomerang.mind.activation}" )
     String activation;
     
@@ -128,26 +131,33 @@ public class StockMarketRNN {
             dataSetIterator.reset();
         }
         
-        // Get recent window.
-        DataSet recentData = new DataSet();
-        while (dataSetIterator.hasNext()) {
-            recentData = dataSetIterator.next(7);
-            if (dataSetIterator.hasNext()) {
-                if (dataSetIterator.next().numExamples() < 7) {
-                    break;
-                } else if (!dataSetIterator.hasNext()) break;
-            }
+        // Deep belief 
+        DataSet recentSamples = recentWindow(dataSetIterator);
+        norm.fit(recentSamples);
+        INDArray results = Nd4j.zeros(1, 1, projection);
+        INDArray initializer = Nd4j.zeros(1,1,1);
+        initializer.putScalar(new int[] {0,0,0}, quote);
+        INDArrayIndex pointZero = NDArrayIndex.point(0);
+        /* TEST */
+        results.putScalar(new int[] {0,0,0}, quote);
+        norm.transform(results);
+        /* END */
+        norm.transform(initializer);
+        StringBuilder buil = new StringBuilder().append('\n');
+        for (int i = 0; i < projection; i++) {
+        	buil.append(i+": "+initializer.getDouble(0,0,0)+'\n');
+        	INDArray step = rnn.rnnTimeStep(results);
+        	INDArrayIndex[] nextPos = {pointZero,pointZero,NDArrayIndex.point(i)};
+            results.put(nextPos, step);
+            norm.transform(results);
+            initializer.put(new INDArrayIndex[] {pointZero, pointZero, pointZero}, step);
         }
-        recentData = expandDims(recentData);
-        norm.fit(recentData);
-        norm.preProcess(recentData);
-        rnn.rnnClearPreviousState();
-        INDArray forecast = rnn.rnnTimeStep(recentData.getFeatures());
-        norm.revertFeatures(forecast);
+        LOG.info(buil.toString());
+        norm.revertFeatures(results);
         shutdown(rec);
-        return forecast;
+        return results;
     }
-	
+    
     public MultiLayerConfiguration config() {
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder() 
             .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT).iterations(1) 
@@ -210,28 +220,19 @@ public class StockMarketRNN {
             LOG.log(Level.SEVERE, "Could not close record reader- {0}", e.getMessage());
         }
     }
-    // DEBUG
-    private void readArray(INDArray indarray) {
-        LOG.info("Printing 3D array-");
-        int[] shape = indarray.shape();
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < shape[0]; i++) {
-            for (int j = 0; j < shape[1]; j++) {
-                for (int k = 0; k < shape[2]; k++) {
-                    double v = indarray.getDouble(i,j,k);
-                    builder.append('\n')
-                        .append('(')
-                        .append(i)
-                        .append(',')
-                        .append(j)
-                        .append(',')
-                        .append(k)
-                        .append(')')
-                        .append(':')
-                        .append(v);
-                }
+    
+    // Get recent window, exlcuding a few on the projection's edge.
+    private DataSet recentWindow(DataSetIterator dataSetIterator) {
+        DataSet recentData = new DataSet();
+        while (dataSetIterator.hasNext()) {
+            recentData = dataSetIterator.next(projection);
+            if (dataSetIterator.hasNext()) {
+                if (dataSetIterator.next().numExamples() < projection) {
+                    break;
+                } else if (!dataSetIterator.hasNext()) break;
             }
         }
-        LOG.info(builder.toString());
+        recentData = expandDims(recentData);
+        return recentData;
     }
 }

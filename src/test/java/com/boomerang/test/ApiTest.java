@@ -33,7 +33,6 @@ import org.springframework.beans.factory.annotation.Value;
 @ContextConfiguration(locations = { "classpath:boomerang-test-context.xml" })
 public class ApiTest extends AbstractTestNGSpringContextTests{
     private static final Logger LOG = Logger.getLogger(ApiTest.class.getName());
-    private static final String PING = "OK";
     int elements = 0;
 
     @Autowired
@@ -54,8 +53,6 @@ public class ApiTest extends AbstractTestNGSpringContextTests{
     @Test()
     public void valueTest() {
         LOG.info("Testing API");
-        String testPing = appService.ping();
-        Assert.assertEquals(testPing,PING);
 
         List<String> stockData = googleFinance.fetchData(symbol);
         LOG.log(Level.INFO, "Data units imported: {0}", stockData.size());

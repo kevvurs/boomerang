@@ -1,9 +1,10 @@
 package com.boomerang.rnn.service;
 
 import com.boomerang.rnn.dao.GoogleFinance;
-import com.boomerang.rnn.data.Window;
+import com.boomerang.rnn.mind.StockMarketRNN;
 import com.boomerang.rnn.util.JsonHandler;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
@@ -12,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.nd4j.linalg.api.ndarray.INDArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -27,6 +29,9 @@ public class AppService {
 	@Autowired
 	GoogleFinance googleFinance;
 	
+	@Autowired
+	StockMarketRNN stockMarketRNN;
+	
 	@Value( "${boomerang.app.ping}" )
 	String pingStatus;
 	
@@ -35,15 +40,21 @@ public class AppService {
 	}
 	
 	@GET
-	@Path("/ping")
 	@Produces({ MediaType.TEXT_HTML })
 	public String ping() {
-		return pingStatus;
+		return new StringBuilder()
+				.append(AppService.class.getName())
+				.append(':')
+				.append(pingStatus)
+				.toString();
 	}
 	
 	@GET
 	@Path("{symbol}")
 	public String stockMarketAnalysis(@PathParam("symbol") String symbol) {
+		List<String> dataRaws = googleFinance.fetchData(symbol);
+		INDArray forecast = stockMarketRNN.learn(dataRaws);
+		
 		return symbol;
 	}
 }
